@@ -9,7 +9,7 @@ export class CountriesService {
 
   constructor(
     @InjectModel(Country)
-    private countryModel: typeof Coun
+    private countryModel: typeof Country
   ) { }
 
   create(createCountryDto: CreateCountryDto) {
