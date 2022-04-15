@@ -4,7 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { hash, genSalt } from 'bcrypt'
-import { CreateOptions, Transaction } from 'sequelize/types';
+import { CreateOptions } from 'sequelize/types';
 
 @Injectable()
 export class UsersService {
