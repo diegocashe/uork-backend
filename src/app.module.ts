@@ -15,7 +15,7 @@ import { ProfileModule } from './profile/profile.module';
       host: 'localhost',
       port: 3306,
       username: 'uork',
-      password: ')QCOh5m)fUHGoWGa',
+      password: '1234',
       database: 'uork',
       // models: [Role],
       autoLoadModels: true,

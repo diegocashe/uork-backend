@@ -37,7 +37,8 @@ export class ProfileService {
 
       console.log(profile.plainObject())
       // profile.headquarters = ;
-      return profile.plainObject()
+      // return profile.plainObject()
+      return profile
     }
     if (user.person) {
       delete user.enterprise;
