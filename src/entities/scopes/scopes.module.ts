@@ -6,8 +6,8 @@ import { Scope } from './entities/scope.entity';
 
 @Module({
   imports: [SequelizeModule.forFeature([Scope])],
-  exports:[SequelizeModule],
+  exports: [SequelizeModule, ScopesService],
   controllers: [ScopesController],
   providers: [ScopesService]
 })
-export class ScopesModule {}
+export class ScopesModule { }

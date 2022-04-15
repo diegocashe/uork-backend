@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { CreateScopeDto } from './dto/create-scope.dto';
 import { UpdateScopeDto } from './dto/update-scope.dto';
+import { Scope } from './entities/scope.entity';
 
 @Injectable()
 export class ScopesService {
+
+  constructor(
+    @InjectModel(Scope)
+    private scopeModel: typeof Scope
+  ) { }
+
   create(createScopeDto: CreateScopeDto) {
-    return 'This action adds a new scope';
+    return this.scopeModel.create({ ...createScopeDto });
   }
 
   findAll() {
-    return `This action returns all scopes`;
+    return this.scopeModel.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} scope`;
+    return this.scopeModel.findByPk(id);
   }
 
   update(id: number, updateScopeDto: UpdateScopeDto) {
-    return `This action updates a #${id} scope`;
+    return this.scopeModel.update(
+      { ...updateScopeDto },
+      {
+        where: { id: id }
+      });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} scope`;
+    return this.scopeModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 }

@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { CreatePublicationDto } from './dto/create-publication.dto';
 import { UpdatePublicationDto } from './dto/update-publication.dto';
+import { Publication } from './entities/publication.entity';
 
 @Injectable()
 export class PublicationsService {
+
+  constructor(
+    @InjectModel(Publication)
+    private publicationModel: typeof Publication
+  ) { }
+
   create(createPublicationDto: CreatePublicationDto) {
-    return 'This action adds a new publication';
+    return this.publicationModel.create({ ...createPublicationDto });
   }
 
   findAll() {
-    return `This action returns all publications`;
+    return this.publicationModel.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} publication`;
+    return this.publicationModel.findByPk(id);
   }
 
   update(id: number, updatePublicationDto: UpdatePublicationDto) {
-    return `This action updates a #${id} publication`;
+    return this.publicationModel.update(
+      { ...updatePublicationDto },
+      {
+        where: { id: id }
+      });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} publication`;
+    return this.publicationModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 }

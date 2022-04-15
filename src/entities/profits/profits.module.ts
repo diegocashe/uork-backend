@@ -6,8 +6,8 @@ import { Profit } from './entities/profit.entity';
 
 @Module({
   imports: [SequelizeModule.forFeature([Profit])],
-  exports:[SequelizeModule],
+  exports: [SequelizeModule, ProfitsService],
   controllers: [ProfitsController],
   providers: [ProfitsService]
 })
-export class ProfitsModule {}
+export class ProfitsModule { }

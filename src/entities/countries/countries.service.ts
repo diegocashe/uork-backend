@@ -23,7 +23,7 @@ export class CountriesService {
   findOne(id: number) {
     return this.countryModel.findByPk(id);
   }
-
+  
   update(id: number, updateCountryDto: UpdateCountryDto) {
     return this.countryModel.update(
       { ...updateCountryDto },

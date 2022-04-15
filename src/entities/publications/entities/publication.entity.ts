@@ -2,13 +2,13 @@ import { Column, Model, Table, ForeignKey, BelongsTo, Unique } from 'sequelize-t
 import { User } from 'src/entities/users/entities/user.entity';
 
 @Table
-export class Publication  extends Model {
+export class Publication extends Model {
     @Column
     title: string
-    
+
     @Unique
     @Column
-    source:  string
+    source: string
 
     @Column
     description: string

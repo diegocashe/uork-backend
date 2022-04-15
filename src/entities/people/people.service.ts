@@ -18,18 +18,26 @@ export class PeopleService {
   }
 
   findAll() {
-    return `This action returns all people`;
+    return this.peopleModel.findAll();
   }
 
   findOne(id: number) {
-    return this.peopleModel.findByPk(id, {include: [ 'educations', 'languages', 'servicesProvided', 'skills', 'interests']});
+    return this.peopleModel.findByPk(id, { include: ['educations', 'languages', 'servicesProvided', 'skills', 'interests'] });
   }
 
   update(id: number, updatePersonDto: UpdatePersonDto) {
-    return `This action updates a #${id} person`;
+    return this.peopleModel.update(
+      { ...updatePersonDto },
+      {
+        where: { id: id }
+      });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} person`;
+    return this.peopleModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 }

@@ -30,7 +30,11 @@ export class RolesService {
   }
 
   update(id: number, updateRoleDto: UpdateRoleDto) {
-    return `This action updates a #${id} role`;
+    return this.roleModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 
   async remove(id: number): Promise<void> {

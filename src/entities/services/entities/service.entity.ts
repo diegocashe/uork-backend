@@ -3,14 +3,14 @@ import { ServicesProvided } from 'src/entities/services-provided/entities/servic
 
 @Table
 export class Service extends Model {
-    
+
     @Unique
     @Column
     name: string;
 
     @Column(DataType.TEXT)
     description: string;
-    
+
     // external assosiations 
 
     @HasMany(() => ServicesProvided)

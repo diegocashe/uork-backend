@@ -6,8 +6,8 @@ import { PeopleSkill } from './entities/people-skill.entity';
 
 @Module({
   imports: [SequelizeModule.forFeature([PeopleSkill])],
-  exports:[SequelizeModule],
+  exports: [SequelizeModule, PeopleSkillsService],
   controllers: [PeopleSkillsController],
   providers: [PeopleSkillsService]
 })
-export class PeopleSkillsModule {}
+export class PeopleSkillsModule { }

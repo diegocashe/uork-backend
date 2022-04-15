@@ -12,13 +12,13 @@ export class ServicesProvided extends Model {
        personId: number
        @BelongsTo(() => Person)
        person: Person
-       
+
        @ForeignKey(() => Service)
        @Column
        serviceId: number
        @BelongsTo(() => Service)
        service: Service
-       
+
        @ForeignKey(() => Scope)
        @Column
        scopeId: number

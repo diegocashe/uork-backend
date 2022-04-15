@@ -6,7 +6,7 @@ import { Position } from './entities/position.entity';
 
 @Module({
   imports: [SequelizeModule.forFeature([Position])],
-  exports:[SequelizeModule],
+  exports:[SequelizeModule, PositionsService],
   controllers: [PositionsController],
   providers: [PositionsService]
 })

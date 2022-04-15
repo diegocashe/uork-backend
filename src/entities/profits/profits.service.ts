@@ -1,26 +1,41 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { CreateProfitDto } from './dto/create-profit.dto';
 import { UpdateProfitDto } from './dto/update-profit.dto';
+import { Profit } from './entities/profit.entity';
 
 @Injectable()
 export class ProfitsService {
+  constructor(
+    @InjectModel(Profit)
+    private profitModel: typeof Profit
+  ) { }
+
   create(createProfitDto: CreateProfitDto) {
-    return 'This action adds a new profit';
+    return this.profitModel.create({ ...createProfitDto });
   }
 
   findAll() {
-    return `This action returns all profits`;
+    return this.profitModel.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} profit`;
+    return this.profitModel.findByPk(id);
   }
 
   update(id: number, updateProfitDto: UpdateProfitDto) {
-    return `This action updates a #${id} profit`;
+    return this.profitModel.update(
+      { ...updateProfitDto },
+      {
+        where: { id: id }
+      });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} profit`;
+    return this.profitModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 }

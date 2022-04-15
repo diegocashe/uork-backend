@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { CreatePositionDto } from './dto/create-position.dto';
 import { UpdatePositionDto } from './dto/update-position.dto';
+import { Position } from './entities/position.entity';
 
 @Injectable()
 export class PositionsService {
+
+  constructor(
+    @InjectModel(Position)
+    private positionModel: typeof Position
+  ) { }
+
   create(createPositionDto: CreatePositionDto) {
-    return 'This action adds a new position';
+    return this.positionModel.create({ ...createPositionDto });
   }
 
   findAll() {
-    return `This action returns all positions`;
+    return this.positionModel.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} position`;
+    return this.positionModel.findByPk(id);
   }
 
   update(id: number, updatePositionDto: UpdatePositionDto) {
-    return `This action updates a #${id} position`;
+    return this.positionModel.update(
+      { ...updatePositionDto },
+      {
+        where: { id: id }
+      });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} position`;
+    return this.positionModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 }

@@ -8,12 +8,12 @@ export class Skill extends Model {
     @Unique
     @Column
     name: string;
-  
+
     @Column(DataType.TEXT)
     description: string;
 
-     // n - m assosiations 
-  
-     @BelongsToMany(() => Person, () => PeopleSkill )
-     people: Person[]
+    // n - m assosiations 
+
+    @BelongsToMany(() => Person, () => PeopleSkill)
+    people: Person[]
 }

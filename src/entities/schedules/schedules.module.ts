@@ -6,8 +6,8 @@ import { Schedule } from './entities/schedule.entity';
 
 @Module({
   imports: [SequelizeModule.forFeature([Schedule])],
-  exports:[SequelizeModule],
+  exports: [SequelizeModule, SchedulesService],
   controllers: [SchedulesController],
   providers: [SchedulesService]
 })
-export class SchedulesModule {}
+export class SchedulesModule { }

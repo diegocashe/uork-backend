@@ -3,20 +3,20 @@ import { JobVacancy } from 'src/entities/job-vacancies/entities/job-vacancy.enti
 import { Worker } from 'src/entities/workers/entities/worker.entity';
 
 
-@Table 
+@Table
 export class Position extends Model {
     @Unique
     @Column
     name: string;
-  
+
     @Column(DataType.TEXT)
     description: string;
 
-     // 1 - m assosiations 
-  
-     @HasMany(() => Worker)
-     workers: Worker[]  
+    // 1 - m assosiations 
 
-     @HasMany(() => JobVacancy)
-     jobVacancies: JobVacancy[]
+    @HasMany(() => Worker)
+    workers: Worker[]
+
+    @HasMany(() => JobVacancy)
+    jobVacancies: JobVacancy[]
 }
