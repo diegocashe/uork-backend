@@ -40,7 +40,7 @@ export class User extends Model {
     // constraing internal assosiations
 
     @ForeignKey(() => Role)
-    @Column({defaultValue: 1})
+    @Column({ defaultValue: 1 })
     roleId: number
     @BelongsTo(() => Role)
     role: Role
