@@ -1,26 +1,43 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { CreateStateDto } from './dto/create-state.dto';
 import { UpdateStateDto } from './dto/update-state.dto';
+import { State } from "./entities/state.entity";
+
 
 @Injectable()
 export class StatesService {
+  
+  constructor(
+    @InjectModel(State)
+    private stateModel: typeof State
+  ) { }
+
   create(createStateDto: CreateStateDto) {
-    return 'This action adds a new state';
+    return this.stateModel.create({ ...createStateDto});
   }
 
   findAll() {
-    return `This action returns all states`;
+    return this.stateModel.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} state`;
+    return this.stateModel.findByPk(id);
   }
 
   update(id: number, updateStateDto: UpdateStateDto) {
-    return `This action updates a #${id} state`;
+    return this.stateModel.update(
+      { ...updateStateDto },
+      {
+        where: { id: id }
+      });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} state`;
+    return this.stateModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 }
