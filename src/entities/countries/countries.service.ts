@@ -17,7 +17,7 @@ export class CountriesService {
   }
 
   findAll() {
-    return this.countryModel.findAlltest();
+    return this.countryModel.findAll();
   }
 
   findOne(id: number) {
