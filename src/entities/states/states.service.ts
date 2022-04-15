@@ -7,14 +7,14 @@ import { State } from "./entities/state.entity";
 
 @Injectable()
 export class StatesService {
-  
+
   constructor(
     @InjectModel(State)
     private stateModel: typeof State
   ) { }
 
   create(createStateDto: CreateStateDto) {
-    return this.stateModel.create({ ...createStateDto});
+    return this.stateModel.create({ ...createStateDto });
   }
 
   findAll() {
