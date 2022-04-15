@@ -1,7 +1,9 @@
 import { Column, Model, Table, HasMany, DataType, Unique } from 'sequelize-typescript';
 import { Education } from 'src/entities/education/entities/education.entity';
 
-@Table
+@Table({
+    tableName:'education_levels'
+})
 export class EducationLevel extends Model {
     @Unique
     @Column
