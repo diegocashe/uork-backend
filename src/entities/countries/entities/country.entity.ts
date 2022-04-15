@@ -2,13 +2,13 @@ import { Column, Model, Table, HasMany, Unique } from 'sequelize-typescript';
 import { State } from 'src/entities/states/entities/state.entity';
 
 @Table
-export class Country extends Model{
+export class Country extends Model {
     @Unique
     @Column
-    name:string;
+    name: string;
 
     @Column
-    shortName:string;
+    shortName: string;
 
     // 1 - m assosiations
 
