@@ -3,7 +3,9 @@ import { LanguageLevel } from 'src/entities/language-levels/entities/language-le
 import { Language } from 'src/entities/languages/entities/language.entity';
 import { Person } from 'src/entities/people/entities/person.entity';
 
-@Table
+@Table({
+    tableName:'language_people'
+})
 export class LanguagePerson extends Model {
 
     @ForeignKey(() => Person)

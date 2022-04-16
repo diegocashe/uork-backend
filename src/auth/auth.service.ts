@@ -38,6 +38,11 @@ export class AuthService {
     };
   }
 
+  private logout(): void {
+    // solo borramos el access_token en el cliente
+  }
+
+
   async singin(user: enterprise | employ): Promise<{ access_token: string }> {
     try {
       const UserId = await this.sequelize.transaction(async t => {

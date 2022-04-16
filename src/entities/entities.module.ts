@@ -60,6 +60,7 @@ import { WorkersModule } from './workers/workers.module';
 // import { LocalizationsModule } from './localizations/localizations.module';
 // import { StatesModule } from './states/states.module';
 // import { CountriesModule } from './countries/countries.module';
+import { PeopleEducationModule } from './people-education/people-education.module';
 
 const modules = [
   RolesModule,
@@ -92,6 +93,7 @@ const modules = [
   LocalizationsModule,
   StatesModule,
   CountriesModule,
+  PeopleEducationModule
 ]
 
 @Global()

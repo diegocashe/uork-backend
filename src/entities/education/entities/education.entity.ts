@@ -1,7 +1,8 @@
-import { Column, Model, Table, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, BelongsTo, BelongsToMany } from 'sequelize-typescript';
 import { EducationLevel } from 'src/entities/education-levels/entities/education-level.entity';
 import { EducationType } from 'src/entities/education-types/entities/education-type.entity';
 import { Enterprise } from 'src/entities/enterprises/entities/enterprise.entity';
+import { PeopleEducation } from 'src/entities/people-education/entities/people-education.entity';
 import { Person } from 'src/entities/people/entities/person.entity';
 import { Scope } from 'src/entities/scopes/entities/scope.entity';
 
@@ -17,11 +18,6 @@ export class Education extends Model {
     @Column
     end_date: Date;
 
-    @ForeignKey(() => Person)
-    @Column
-    personId: number
-    @BelongsTo(() => Person)
-    person: Person
 
     @ForeignKey(() => EducationLevel)
     @Column
@@ -47,4 +43,8 @@ export class Education extends Model {
     @BelongsTo(() => Enterprise)
     enterprise: Enterprise
 
+    // n - m assosiations
+
+    @BelongsToMany(() => Person, () => PeopleEducation)
+    people: Person[]
 }

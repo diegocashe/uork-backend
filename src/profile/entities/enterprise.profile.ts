@@ -4,14 +4,15 @@ import { Headquarter } from "../types/headquarters";
 import { Profile } from "./profile.entity";
 import { Enterprise as EnterpriseModel } from "src/entities/enterprises/entities/enterprise.entity";
 import { Headquarters as HeadquartersModel } from "src/entities/headquarters/entities/headquarters.entity";
+import { Education as EducationModel } from "src/entities/education/entities/education.entity";
 
 export class EnterpriseProfile extends Profile {
-    private _educationsProvided: Education[];
-    private _headquarters: Headquarter[];
+    private _educationsProvided: Education[] = [];
+    private _headquarters: Headquarter[] = [];
     private _enterprise: Enterprise;
 
     public patchEnterprise(object: EnterpriseModel): Enterprise {
-        this._enterprise = {
+        return {
             id: object.id,
             name: object.name,
             description: object.description,
@@ -20,9 +21,8 @@ export class EnterpriseProfile extends Profile {
             foundation: object.foundation,
             legalForm: object.legalForm?.name,
         }
-        return this._enterprise
     }
-    
+
     public patchHeadquarter(hq: HeadquartersModel): Headquarter {
         return {
             id: hq.id,
@@ -34,6 +34,31 @@ export class EnterpriseProfile extends Profile {
                 country: ''
             }
         }
+    }
+
+    public patchEducation(educ: EducationModel): Education {
+        return {
+            title: educ.title,
+            startDate: new Date(educ.start_date),
+            endDate: new Date(educ.end_date),
+            level: educ.educationLevel.name,
+            type: educ.educationType.name,
+            scope: educ.scope.name,
+            enterprise: {
+                id: this._enterprise.id,
+                name: this._enterprise.name,
+            },
+        }
+    }
+
+    public addHeadquarter(hq: Headquarter): Headquarter[] {
+        this._headquarters.push(hq)
+        return this._headquarters;
+    }
+
+    public addEducationProvided(educ: Education): Education[] {
+        this._educationsProvided.push(educ)
+        return this._educationsProvided;
     }
 
     public plainObject() {

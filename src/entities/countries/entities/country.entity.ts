@@ -8,7 +8,7 @@ export class Country extends Model {
     name: string;
 
     @Column
-    shortName: string;
+    code: string;
 
     // 1 - m assosiations
 

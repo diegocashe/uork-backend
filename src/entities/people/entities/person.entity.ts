@@ -4,6 +4,7 @@ import { Interest } from 'src/entities/interests/entities/interest.entity';
 import { JobVacancy } from 'src/entities/job-vacancies/entities/job-vacancy.entity';
 import { LanguagePerson } from 'src/entities/language-people/entities/language-person.entity';
 import { Localization } from 'src/entities/localizations/entities/localization.entity';
+import { PeopleEducation } from 'src/entities/people-education/entities/people-education.entity';
 import { PeopleSkill } from 'src/entities/people-skills/entities/people-skill.entity';
 import { Postulation } from 'src/entities/postulations/entities/postulation.entity';
 import { ServicesProvided } from 'src/entities/services-provided/entities/services-provided.entity';
@@ -55,10 +56,10 @@ export class Person extends Model {
     @HasMany(() => ServicesProvided)
     servicesProvided: ServicesProvided[]
     
-    @HasMany(() => Education)
-    educations: Education[]
-    
     // n - m assosiations
+    
+    @BelongsToMany(() => Education, () => PeopleEducation)
+    educations: Education[]
     
     @BelongsToMany(() => JobVacancy, () => Postulation)
     postulations: JobVacancy[]

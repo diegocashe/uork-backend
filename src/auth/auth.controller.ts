@@ -14,7 +14,6 @@ export class AuthController {
   @Public()
   @Post('/singin')
   async singin(@Request() req) {
-    console.log(req.headers)
     const accessToken = await this.authService.singin(req.body)
     return accessToken;
   }
@@ -23,6 +22,7 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('/login')
   async login(@Request() req: { user: ValidatedUser }) {
+    // console
     const { username, id } = req.user
     return this.authService.login(username, id);
   }

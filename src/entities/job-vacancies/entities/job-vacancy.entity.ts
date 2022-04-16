@@ -8,7 +8,9 @@ import { Postulation } from 'src/entities/postulations/entities/postulation.enti
 import { Profit } from 'src/entities/profits/entities/profit.entity';
 import { Schedule } from 'src/entities/schedules/entities/schedule.entity';
 
-@Table
+@Table({
+    tableName:'job-vacancies'
+})
 export class JobVacancy extends Model {
     @Column
     title: string

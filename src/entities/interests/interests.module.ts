@@ -6,7 +6,7 @@ import { Interest } from './entities/interest.entity';
 
 @Module({
   imports: [SequelizeModule.forFeature([Interest])],
-  exports:[SequelizeModule],
+  exports:[SequelizeModule, InterestsService],
   controllers: [InterestsController],
   providers: [InterestsService]
 })
