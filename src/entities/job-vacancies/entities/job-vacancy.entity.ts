@@ -21,7 +21,7 @@ export class JobVacancy extends Model {
 
     @Column(DataType.DOUBLE)
     range_max: number
-    
+
     // n to m assosiation
     @BelongsToMany(() => Person, () => Postulation)
     people: Person[]

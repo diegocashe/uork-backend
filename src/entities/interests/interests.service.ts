@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { CreateInterestDto } from './dto/create-interest.dto';
 import { UpdateInterestDto } from './dto/update-interest.dto';
+import { Interest } from './entities/interest.entity';
 
 @Injectable()
 export class InterestsService {
+
+  constructor(
+    @InjectModel(Interest)
+    private interestModel: typeof Interest
+  ) { }
+
   create(createInterestDto: CreateInterestDto) {
-    return 'This action adds a new interest';
+    return this.interestModel.create({ ...createInterestDto });
   }
 
   findAll() {
-    return `This action returns all interests`;
+    return this.interestModel.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} interest`;
+    return this.interestModel.findByPk(id);
   }
 
   update(id: number, updateInterestDto: UpdateInterestDto) {
-    return `This action updates a #${id} interest`;
+    return this.interestModel.update(
+      { ...updateInterestDto },
+      {
+        where: { id: id }
+      });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} interest`;
+    return this.interestModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 }

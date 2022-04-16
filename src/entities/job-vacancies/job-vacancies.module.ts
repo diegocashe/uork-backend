@@ -6,8 +6,8 @@ import { JobVacancy } from './entities/job-vacancy.entity';
 
 @Module({
   imports: [SequelizeModule.forFeature([JobVacancy])],
-  exports:[SequelizeModule],
+  exports: [SequelizeModule, JobVacanciesService],
   controllers: [JobVacanciesController],
   providers: [JobVacanciesService]
 })
-export class JobVacanciesModule {}
+export class JobVacanciesModule { }
