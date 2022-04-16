@@ -6,8 +6,8 @@ import { EducationType } from './entities/education-type.entity';
 
 @Module({
   imports: [SequelizeModule.forFeature([EducationType])],
-  exports:[SequelizeModule],
+  exports: [SequelizeModule, EducationTypesService],
   controllers: [EducationTypesController],
   providers: [EducationTypesService]
 })
-export class EducationTypesModule {}
+export class EducationTypesModule { }

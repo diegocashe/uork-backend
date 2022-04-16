@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { CreateEducationTypeDto } from './dto/create-education-type.dto';
 import { UpdateEducationTypeDto } from './dto/update-education-type.dto';
+import { EducationType } from './entities/education-type.entity';
 
 @Injectable()
 export class EducationTypesService {
+  
+  constructor(
+    @InjectModel(EducationType)
+    private educationtypeModel: typeof EducationType
+  ) { }
+
   create(createEducationTypeDto: CreateEducationTypeDto) {
-    return 'This action adds a new educationType';
+    return this.educationtypeModel.create({ ...createEducationTypeDto});
   }
 
   findAll() {
-    return `This action returns all educationTypes`;
+    return this.educationtypeModel.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} educationType`;
+    return this.educationtypeModel.findByPk(id);
   }
 
   update(id: number, updateEducationTypeDto: UpdateEducationTypeDto) {
-    return `This action updates a #${id} educationType`;
+    return this.educationtypeModel.update(
+      { ...updateEducationTypeDto },
+      {
+        where: { id: id }
+      });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} educationType`;
+    return this.educationtypeModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 }

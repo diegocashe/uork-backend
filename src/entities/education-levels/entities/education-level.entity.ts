@@ -2,18 +2,18 @@ import { Column, Model, Table, HasMany, DataType, Unique } from 'sequelize-types
 import { Education } from 'src/entities/education/entities/education.entity';
 
 @Table({
-    tableName:'education_levels'
+    tableName: 'education_levels'
 })
 export class EducationLevel extends Model {
     @Unique
     @Column
     name: string;
-  
+
     @Column(DataType.TEXT)
     description: string;
 
-     // external assosiations 
-  
+    // external assosiations 
+
     @HasMany(() => Education)
     educations: Education[]
 }

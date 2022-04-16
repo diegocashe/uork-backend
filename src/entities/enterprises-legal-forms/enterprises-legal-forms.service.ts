@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { CreateEnterprisesLegalFormDto } from './dto/create-enterprises-legal-form.dto';
 import { UpdateEnterprisesLegalFormDto } from './dto/update-enterprises-legal-form.dto';
+import { EnterprisesLegalForm } from './entities/enterprises-legal-form.entity';
 
 @Injectable()
 export class EnterprisesLegalFormsService {
+
+  constructor(
+    @InjectModel(EnterprisesLegalForm)
+    private enterpriselegalformModel: typeof EnterprisesLegalForm
+  ) { }
+
   create(createEnterprisesLegalFormDto: CreateEnterprisesLegalFormDto) {
-    return 'This action adds a new enterprisesLegalForm';
+    return this.enterpriselegalformModel.create({ ...createEnterprisesLegalFormDto });
   }
 
   findAll() {
-    return `This action returns all enterprisesLegalForms`;
+    return this.enterpriselegalformModel.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} enterprisesLegalForm`;
+    return this.enterpriselegalformModel.findByPk(id);
   }
 
   update(id: number, updateEnterprisesLegalFormDto: UpdateEnterprisesLegalFormDto) {
-    return `This action updates a #${id} enterprisesLegalForm`;
+    return this.enterpriselegalformModel.update(
+      { ...updateEnterprisesLegalFormDto },
+      {
+        where: { id: id }
+      });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} enterprisesLegalForm`;
+    return this.enterpriselegalformModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 }

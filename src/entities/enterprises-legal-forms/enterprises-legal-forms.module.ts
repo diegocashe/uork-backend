@@ -6,8 +6,8 @@ import { EnterprisesLegalForm } from './entities/enterprises-legal-form.entity';
 
 @Module({
   imports: [SequelizeModule.forFeature([EnterprisesLegalForm])],
-  exports:[SequelizeModule],
+  exports: [SequelizeModule, EnterprisesLegalFormsService],
   controllers: [EnterprisesLegalFormsController],
   providers: [EnterprisesLegalFormsService]
 })
-export class EnterprisesLegalFormsModule {}
+export class EnterprisesLegalFormsModule { }

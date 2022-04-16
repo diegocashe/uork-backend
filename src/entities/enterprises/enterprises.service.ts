@@ -18,18 +18,27 @@ export class EnterprisesService {
   }
 
   findAll() {
-    return `This action returns all enterprises`;
+    return this.enterpriseModel.findAll();
   }
 
-  findOne(id: number):Promise<Enterprise>{
+  findOne(id: number): Promise<Enterprise> {
     return this.enterpriseModel.findByPk(id, { include: ['headquarters', 'educations', 'legalForm'] });
   }
 
   update(id: number, updateEnterpriseDto: UpdateEnterpriseDto) {
-    return `This action updates a #${id} enterprise`;
+    return this.enterpriseModel.update(
+      { ...updateEnterpriseDto },
+      {
+        where: { id: id }
+      }
+    );
   }
 
   remove(id: number) {
-    return `This action removes a #${id} enterprise`;
+    return this.enterpriseModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 }

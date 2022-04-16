@@ -13,31 +13,39 @@ export class EducationService {
   ) { }
 
   create(createEducationDto: CreateEducationDto) {
-    return 'This action adds a new education';
+    return this.educationModel.create({ ...createEducationDto });
   }
-  
+
   findAll() {
-    return `This action returns all education`;
+    return this.educationModel.findAll();
   }
-  
+
   findOne(id: number) {
-    return `This action returns a #${id} education`;
+    return this.educationModel.findByPk(id);
   }
-  
+
   update(id: number, updateEducationDto: UpdateEducationDto) {
-    return `This action updates a #${id} education`;
+    return this.educationModel.update(
+      { ...updateEducationDto },
+      {
+        where: { id: id }
+      });
   }
-  
+
   remove(id: number) {
-    return `This action removes a #${id} education`;
+    return this.educationModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
-  
-   findByEnterpriseId(enterpriseId: number): Promise<Education[]> {
-     return this.educationModel.findAll({
-       where: {
-         enterpriseId: enterpriseId
-       },
-       include: ['educationLevel', 'educationType', 'scope', 'people']
-     })
-   }
+
+  findByEnterpriseId(enterpriseId: number): Promise<Education[]> {
+    return this.educationModel.findAll({
+      where: {
+        enterpriseId: enterpriseId
+      },
+      include: ['educationLevel', 'educationType', 'scope', 'people']
+    })
+  }
 }
