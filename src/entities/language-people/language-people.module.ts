@@ -6,7 +6,7 @@ import { LanguagePerson } from './entities/language-person.entity';
 
 @Module({
   imports: [SequelizeModule.forFeature([LanguagePerson])],
-  exports:[SequelizeModule],
+  exports:[SequelizeModule, LanguagePeopleService],
   controllers: [LanguagePeopleController],
   providers: [LanguagePeopleService]
 })

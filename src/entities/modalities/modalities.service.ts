@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { CreateModalityDto } from './dto/create-modality.dto';
 import { UpdateModalityDto } from './dto/update-modality.dto';
+import { Modality } from './entities/modality.entity';
 
 @Injectable()
 export class ModalitiesService {
+
+  constructor(
+    @InjectModel(Modality)
+    private modalityModel: typeof Modality
+  ) { }
+
   create(createModalityDto: CreateModalityDto) {
-    return 'This action adds a new modality';
+    return this.modalityModel.create({ ...createModalityDto });
   }
 
   findAll() {
-    return `This action returns all modalities`;
+    return this.modalityModel.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} modality`;
+    return this.modalityModel.findByPk(id);
   }
 
   update(id: number, updateModalityDto: UpdateModalityDto) {
-    return `This action updates a #${id} modality`;
+    return this.modalityModel.update(
+      { ...updateModalityDto },
+      {
+        where: { id: id }
+      });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} modality`;
+    return this.modalityModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 }

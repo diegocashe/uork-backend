@@ -4,15 +4,15 @@ import { Person } from 'src/entities/people/entities/person.entity';
 import { State } from 'src/entities/states/entities/state.entity';
 
 @Table
-export class Localization extends Model{
+export class Localization extends Model {
     @Column
-    description:string;
+    description: string;
 
     // 1 - m assosiations
 
     @HasMany(() => Headquarters)
     headquarters: Headquarters[]
-    
+
     @HasMany(() => Person)
     people: Person[]
 

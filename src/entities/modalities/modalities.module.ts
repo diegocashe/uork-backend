@@ -6,8 +6,8 @@ import { Modality } from './entities/modality.entity';
 
 @Module({
   imports: [SequelizeModule.forFeature([Modality])],
-  exports:[SequelizeModule],
+  exports: [SequelizeModule, ModalitiesService],
   controllers: [ModalitiesController],
   providers: [ModalitiesService]
 })
-export class ModalitiesModule {}
+export class ModalitiesModule { }

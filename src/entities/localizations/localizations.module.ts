@@ -6,8 +6,8 @@ import { Localization } from './entities/localization.entity';
 
 @Module({
   imports: [SequelizeModule.forFeature([Localization])],
-  exports:[SequelizeModule],
+  exports: [SequelizeModule, LocalizationsService],
   controllers: [LocalizationsController],
   providers: [LocalizationsService]
 })
-export class LocalizationsModule {}
+export class LocalizationsModule { }

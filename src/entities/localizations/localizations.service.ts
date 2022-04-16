@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { CreateLocalizationDto } from './dto/create-localization.dto';
 import { UpdateLocalizationDto } from './dto/update-localization.dto';
+import { Localization } from './entities/localization.entity';
 
 @Injectable()
 export class LocalizationsService {
+
+  constructor(
+    @InjectModel(Localization)
+    private localizationModel: typeof Localization
+  ) { }
+
   create(createLocalizationDto: CreateLocalizationDto) {
-    return 'This action adds a new localization';
+    return this.localizationModel.create({ ...CreateLocalizationDto });
   }
 
   findAll() {
-    return `This action returns all localizations`;
+    return this.localizationModel.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} localization`;
+    return this.localizationModel.findByPk(id);
   }
 
   update(id: number, updateLocalizationDto: UpdateLocalizationDto) {
-    return `This action updates a #${id} localization`;
+    return this.localizationModel.update(
+      { ...updateLocalizationDto },
+      {
+        where: { id: id }
+      });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} localization`;
+    return this.localizationModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 }

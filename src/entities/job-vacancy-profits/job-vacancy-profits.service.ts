@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { CreateJobVacancyProfitDto } from './dto/create-job-vacancy-profit.dto';
 import { UpdateJobVacancyProfitDto } from './dto/update-job-vacancy-profit.dto';
+import { JobVacancyProfit } from './entities/job-vacancy-profit.entity';
 
 @Injectable()
 export class JobVacancyProfitsService {
+
+  constructor(
+    @InjectModel(JobVacancyProfit)
+    private jobvacancyprofitModel: typeof JobVacancyProfit
+  ) { }
+
   create(createJobVacancyProfitDto: CreateJobVacancyProfitDto) {
-    return 'This action adds a new jobVacancyProfit';
+    return this.jobvacancyprofitModel.create({ ...createJobVacancyProfitDto });
   }
 
   findAll() {
-    return `This action returns all jobVacancyProfits`;
+    return this.jobvacancyprofitModel.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} jobVacancyProfit`;
+    return this.jobvacancyprofitModel.findByPk(id);
   }
 
   update(id: number, updateJobVacancyProfitDto: UpdateJobVacancyProfitDto) {
-    return `This action updates a #${id} jobVacancyProfit`;
+    return this.jobvacancyprofitModel.update(
+      { ...updateJobVacancyProfitDto },
+      {
+        where: { id: id }
+      });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} jobVacancyProfit`;
+    return this.jobvacancyprofitModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 }
