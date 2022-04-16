@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { CreateLanguageLevelDto } from './dto/create-language-level.dto';
 import { UpdateLanguageLevelDto } from './dto/update-language-level.dto';
+import { LanguageLevel } from './entities/language-level.entity';
 
 @Injectable()
 export class LanguageLevelsService {
+
+  constructor(
+    @InjectModel(LanguageLevel)
+    private languagelevelModel: typeof LanguageLevel
+  ) { }
+
   create(createLanguageLevelDto: CreateLanguageLevelDto) {
-    return 'This action adds a new languageLevel';
+    return this.languagelevelModel.create({ ...createLanguageLevelDto });
   }
 
   findAll() {
-    return `This action returns all languageLevels`;
+    return this.languagelevelModel.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} languageLevel`;
+    return this.languagelevelModel.findByPk(id);
   }
 
   update(id: number, updateLanguageLevelDto: UpdateLanguageLevelDto) {
-    return `This action updates a #${id} languageLevel`;
+    return this.languagelevelModel.update(
+      { ...updateLanguageLevelDto },
+      {
+        where: { id: id }
+      });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} languageLevel`;
+    return this.languagelevelModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 }

@@ -13,11 +13,11 @@ export class HeadquartersService {
   ) { }
 
   create(createHeadquartersDto: CreateHeadquartersDto) {
-    return 'This action adds a new headquarters';
+    return this.headquartersModel.create({ ...createHeadquartersDto });
   }
 
   findAll() {
-    return `This action returns all headquarters`;
+    return this.headquartersModel.findAll();
   }
 
   findOne(id: number) {
@@ -34,10 +34,18 @@ export class HeadquartersService {
   }
 
   update(id: number, updateHeadquartersDto: UpdateHeadquartersDto) {
-    return `This action updates a #${id} headquarters`;
+    return this.headquartersModel.update(
+      { ...updateHeadquartersDto },
+      {
+        where: { id: id }
+      });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} headquarters`;
+    return this.headquartersModel.destroy({
+      where: {
+        id: id
+      }
+    });
   }
 }
